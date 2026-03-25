@@ -37,7 +37,7 @@ const MainLayout = () => {
   const handleLogout = () => {
     localStorage.removeItem('employee_token');
     localStorage.removeItem('employee_auth_employee');
-    navigate('/employee-login', { replace: true });
+    navigate('/login', { replace: true });
   };
 
   return (
