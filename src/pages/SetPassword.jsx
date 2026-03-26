@@ -15,6 +15,7 @@ const SetPassword = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [isPasswordSet, setIsPasswordSet] = useState(false);
 
   const validate = () => {
     const nextErrors = {};
@@ -57,8 +58,8 @@ const SetPassword = () => {
         password,
         password_confirmation: confirmPassword,
       });
-
-      navigate('/login?passwordSet=1', { replace: true });
+      setIsPasswordSet(true);
+      setApiError('');
     } catch (error) {
       const message =
         error?.response?.data?.message || error?.message || 'Failed to set password.';
@@ -82,6 +83,21 @@ const SetPassword = () => {
         {(errors.email || errors.token) ? (
           <div className="employee-set-password-alert">
             {errors.email || errors.token}
+          </div>
+        ) : null}
+
+        {isPasswordSet ? (
+          <div className="employee-set-password-success">
+            <p className="employee-set-password-success-text">
+              Password set successfully.
+            </p>
+            <button
+              type="button"
+              className="employee-set-password-button"
+              onClick={() => navigate('/login?passwordSet=1', { replace: true })}
+            >
+              Go to Login
+            </button>
           </div>
         ) : null}
 
@@ -121,7 +137,7 @@ const SetPassword = () => {
           <button
             type="submit"
             className="employee-set-password-button"
-            disabled={loading || !email || !token}
+            disabled={loading || !email || !token || isPasswordSet}
           >
             {loading ? 'Setting password...' : 'Set Password'}
           </button>
