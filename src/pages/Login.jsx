@@ -44,9 +44,15 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const response = await api.post('/employee/login', {
-        email,
+      const payload = {
+        email: email.trim(),
         password,
+      };
+
+      const response = await api.post('/employee/login', payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
 
       const token = response?.data?.data?.token;

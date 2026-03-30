@@ -8,12 +8,21 @@ const Sidebar = () => {
 
       <nav className="employee-sidebar-nav">
         <NavLink
-          to="/dashboard"
+          to="/time-tracking"
           className={({ isActive }) =>
             `employee-sidebar-link ${isActive ? 'active' : ''}`
           }
         >
-          Dashboard
+          Time Tracking
+        </NavLink>
+
+        <NavLink
+          to="/listings"
+          className={({ isActive }) =>
+            `employee-sidebar-link ${isActive ? 'active' : ''}`
+          }
+        >
+          Listings
         </NavLink>
       </nav>
     </aside>

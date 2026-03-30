@@ -29,6 +29,324 @@
   color: #202c4b;
 }
 
+.employee-section-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c2843;
+}
+
+.employee-hours-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.employee-hours-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e8edf3;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(18, 38, 63, 0.06);
+}
+
+.employee-hours-card h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #5d6b83;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.employee-hours-card p {
+  margin: 10px 0 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a4f88;
+}
+
+.employee-time-tracker-card {
+  border-radius: 16px;
+  background: linear-gradient(120deg, #2969ad 0%, #3b7fc7 55%, #4489d2 100%);
+  box-shadow: 0 14px 30px rgba(37, 102, 171, 0.3);
+  padding: 20px;
+  color: #ffffff;
+}
+
+.employee-time-tracker-head h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.employee-time-tracker-head p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.employee-time-tracker-controls {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto auto;
+  align-items: end;
+  gap: 18px;
+}
+
+.employee-time-tracker-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.employee-time-tracker-group select {
+  width: 100%;
+  max-width: 340px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  padding: 0 12px;
+  color: #1f2f49;
+  background: #ffffff;
+}
+
+.employee-time-tracker-timer-wrap {
+  text-align: center;
+}
+
+.employee-time-tracker-timer {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.employee-time-tracker-state {
+  margin: 4px 0 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.employee-time-tracker-job {
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.employee-time-tracker-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.employee-btn {
+  height: 42px;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.employee-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.employee-btn-primary {
+  background: #0fdaf6;
+  color: #073a4d;
+}
+
+.employee-btn-danger {
+  background: #f45757;
+  color: #ffffff;
+}
+
+.employee-btn-ghost {
+  border: 1px solid #d8e0ec;
+  background: #ffffff;
+  color: #2a3f62;
+}
+
+.employee-calendar-card {
+  background: #ffffff;
+  border: 1px solid #e3e8f1;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.employee-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.employee-calendar-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1f2f49;
+}
+
+.employee-calendar-header p {
+  margin: 4px 0 0;
+  color: #66758f;
+  font-size: 13px;
+}
+
+.react-calendar {
+  width: 100%;
+  border: 1px solid #e5ebf4;
+  border-radius: 12px;
+  font-family: inherit;
+}
+
+.react-calendar__navigation {
+  margin-bottom: 8px;
+}
+
+.employee-calendar-has-listing {
+  background: #dff2ff;
+  border-radius: 8px;
+  color: #0f5ea8;
+  font-weight: 700;
+}
+
+.employee-listings-wrap {
+  display: grid;
+  gap: 14px;
+}
+
+.employee-listings-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.employee-listings-head h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #1f2f49;
+}
+
+.employee-listings-head p {
+  margin: 0;
+  color: #6a7891;
+  font-size: 13px;
+}
+
+.employee-listings-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.employee-listing-column {
+  border: 1px solid #e6ecf4;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fbfcff;
+}
+
+.employee-listing-column h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  color: #243452;
+}
+
+.employee-listings-empty,
+.employee-listings-loading,
+.employee-listings-error {
+  margin: 0;
+  font-size: 14px;
+  color: #5f6d86;
+}
+
+.employee-listings-error {
+  color: #b42318;
+}
+
+.employee-listing-stack {
+  display: grid;
+  gap: 10px;
+}
+
+.employee-listing-card {
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e6ecf5;
+  padding: 12px;
+}
+
+.employee-listing-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+}
+
+.employee-listing-card-header h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #203150;
+}
+
+.employee-listing-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.employee-listing-badge.approved {
+  background: #dcf6e4;
+  color: #1b7d4f;
+}
+
+.employee-listing-badge.pending {
+  background: #fff2c7;
+  color: #8c6700;
+}
+
+.employee-listing-date {
+  margin: 8px 0 0;
+  color: #50607b;
+  font-size: 13px;
+}
+
+.employee-listing-meta {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.employee-listing-meta span {
+  font-size: 11px;
+  background: #f1f5fb;
+  color: #314467;
+  border-radius: 999px;
+  padding: 3px 8px;
+}
+
+.employee-listing-description {
+  margin: 10px 0 0;
+  color: #55647d;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
 .employee-time-card {
   min-height: 172px;
   border-radius: 20px;
@@ -439,6 +757,19 @@
     max-width: 100%;
   }
 
+  .employee-hours-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .employee-time-tracker-controls {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .employee-listings-grid {
+    grid-template-columns: 1fr;
+  }
+
   .employee-time-card-grid {
     grid-template-columns: 1fr;
   }
@@ -451,6 +782,12 @@
 @media (max-width: 640px) {
   .employee-dashboard-panel {
     padding: 12px;
+  }
+
+  .employee-calendar-header,
+  .employee-listings-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .employee-time-card {

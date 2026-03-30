@@ -1,8 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MainLayout from '../layout/MainLayout';
 import Login from '../pages/Login';
-import Dashboard from '../pages/Dashboard';
+import ListingsPage from '../pages/ListingsPage';
 import SetPassword from '../pages/SetPassword';
+import TimeTracking from '../pages/TimeTracking';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('employee_token');
@@ -22,21 +23,24 @@ const AppRoutes = () => {
       <Route path="/set-password" element={<SetPassword />} />
 
       <Route
-        path="/dashboard"
+        path="/"
         element={
           <ProtectedRoute>
             <MainLayout />
           </ProtectedRoute>
         }
       >
-        <Route index element={<Dashboard />} />
+        <Route index element={<Navigate to="/time-tracking" replace />} />
+        <Route path="time-tracking" element={<TimeTracking />} />
+        <Route path="listings" element={<ListingsPage />} />
+        <Route path="dashboard" element={<Navigate to="/time-tracking" replace />} />
       </Route>
 
       <Route
         path="/"
         element={
           localStorage.getItem('employee_token') ? (
-            <Navigate to="/dashboard" replace />
+            <Navigate to="/time-tracking" replace />
           ) : (
             <Navigate to="/login" replace />
           )

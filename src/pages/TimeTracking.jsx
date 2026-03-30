@@ -6,9 +6,6 @@ import {
   getTimeEntries,
   updateTimeEntry,
 } from '../api/timeTracking';
-import { getEmployeeListings } from '../api/listings';
-import CalendarView from '../components/CalendarView';
-import Listings from '../components/Listings';
 import TimeTracker from '../components/TimeTracker';
 import EditEntryModal from '../components/time-tracking/EditEntryModal';
 import TimeEntriesTable from '../components/time-tracking/TimeEntriesTable';
@@ -51,17 +48,7 @@ const formatHours = (seconds) => {
   return `${hours}h ${String(mins).padStart(2, '0')}m`;
 };
 
-const toDateKey = (value) => {
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return null;
-
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-};
-
-const Dashboard = () => {
+const TimeTracking = () => {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState('');
   const [entries, setEntries] = useState([]);
@@ -73,11 +60,6 @@ const Dashboard = () => {
   const [activeEntryId, setActiveEntryId] = useState(null);
   const [activeSeedSeconds, setActiveSeedSeconds] = useState(0);
   const [workingHours, setWorkingHours] = useState(defaultHours);
-
-  const [allListings, setAllListings] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [listingsLoading, setListingsLoading] = useState(true);
-  const [listingsError, setListingsError] = useState('');
 
   const [dashboardLoading, setDashboardLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState(false);
@@ -151,7 +133,7 @@ const Dashboard = () => {
         setActiveSeedSeconds(0);
       }
     } catch (error) {
-      setToast({ type: 'error', message: getMessage(error, 'Failed to load dashboard.') });
+      setToast({ type: 'error', message: getMessage(error, 'Failed to load time tracking data.') });
     } finally {
       if (withLoader) {
         setDashboardLoading(false);
@@ -159,27 +141,8 @@ const Dashboard = () => {
     }
   };
 
-  const loadListings = async () => {
-    setListingsLoading(true);
-    setListingsError('');
-
-    try {
-      const response = await getEmployeeListings();
-      const items = response?.data?.data?.items || [];
-      setAllListings(items);
-    } catch (error) {
-      setListingsError(getMessage(error, 'Failed to load listings.'));
-    } finally {
-      setListingsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const init = async () => {
-      await Promise.all([loadDashboard({ withLoader: true }), loadListings()]);
-    };
-
-    init();
+    loadDashboard({ withLoader: true });
   }, []);
 
   useEffect(() => {
@@ -284,23 +247,6 @@ const Dashboard = () => {
     }
   };
 
-  const filteredListings = useMemo(() => {
-    if (!selectedDate) return allListings;
-
-    const key = toDateKey(selectedDate);
-    return allListings.filter((item) => toDateKey(item.date) === key);
-  }, [allListings, selectedDate]);
-
-  const approvedListings = useMemo(
-    () => filteredListings.filter((item) => item.status === 'approved'),
-    [filteredListings]
-  );
-
-  const pendingListings = useMemo(
-    () => filteredListings.filter((item) => item.status === 'pending'),
-    [filteredListings]
-  );
-
   const displayWorkingHours = useMemo(() => {
     if (!activeSession?.check_in || !isWorking) {
       return workingHours;
@@ -332,8 +278,8 @@ const Dashboard = () => {
   return (
     <div className="employee-dashboard">
       <section>
-        <p className="employee-dashboard-overline">Dashboard</p>
-        <h1 className="employee-dashboard-title">Time Tracking Dashboard</h1>
+        <p className="employee-dashboard-overline">Panel</p>
+        <h1 className="employee-dashboard-title">Time Tracking</h1>
       </section>
 
       {toast.message ? (
@@ -372,23 +318,6 @@ const Dashboard = () => {
       </section>
 
       <section className="employee-dashboard-panel">
-        <CalendarView
-          listings={allListings}
-          selectedDate={selectedDate}
-          onDateChange={setSelectedDate}
-          onClearDate={() => setSelectedDate(null)}
-        />
-
-        <Listings
-          approvedListings={approvedListings}
-          pendingListings={pendingListings}
-          loading={listingsLoading}
-          error={listingsError}
-          selectedDate={selectedDate}
-        />
-      </section>
-
-      <section className="employee-dashboard-panel">
         <h2 className="employee-section-title">Time Log History</h2>
         {tableLoading ? (
           <div className="employee-table-loading">Loading entries...</div>
@@ -414,4 +343,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default TimeTracking;
