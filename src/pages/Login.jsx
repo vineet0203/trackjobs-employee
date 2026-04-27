@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import api from '../api/axios';
 import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams] = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +19,16 @@ const Login = () => {
       setSuccessMessage('Password set successfully. Please log in.');
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const authToken = params.get('authToken');
+
+    if (!authToken) return;
+
+    localStorage.setItem('employee_token', authToken);
+    navigate('/time-tracking', { replace: true });
+  }, [location.search, navigate]);
 
   const validate = () => {
     const nextErrors = {};
@@ -84,6 +95,20 @@ const Login = () => {
   return (
     <div className="employee-login-page">
       <div className="employee-login-card">
+        <button
+          type="button"
+          className="employee-login-back-button"
+          onClick={() => {
+            if (window.history.length > 1) {
+              navigate(-1);
+              return;
+            }
+            navigate('/', { replace: true });
+          }}
+        >
+          Back
+        </button>
+
         <h1 className="employee-login-title">Employee Login</h1>
         <p className="employee-login-subtitle">Sign in to access your employee dashboard.</p>
 
